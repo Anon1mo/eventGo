@@ -1,0 +1,71 @@
+<h1 ng-if="!edit">New Offer</h1>
+<h1 ng-if="edit">Edit Offer</h1>
+<h2 ng-if="edit">Owner: {{offer.user_id.username}}</h2>
+<h3 ng-if="edit">Event: {{offer.event_id.name}}</h3>
+<form name="offer_form" novalidate>
+    <fieldset class="form-group">
+        <label for="price">Price (currency: Zloty)</label>
+        <input class="form-control" min="0" type="number" id="price" name="price" ng-model="offer.price" required>
+
+        <div class="error" ng-show="offer_form.price.$dirty && offer_form.price.$invalid">
+            <small class="error" ng-show="offer_form.price.$error.required">
+                Price of the offer is required.
+            </small>
+        </div>
+    </fieldset>
+
+    <fieldset ng-if="!edit" class="form-group">
+        <label for="placesMax">Maximum Number of places in a vehicle</label>
+        <input class="form-control" type="Number" min="0" max="99" id="placesMax" name="placesMax"
+               ng-model="offer.placesMax" required>
+
+        <div class="error" ng-show="offer_form.placesMax.$dirty && offer_form.placesMax.$invalid">
+            <small class="error" ng-show="offer_form.placesMax.$error.required">
+                Maximum number of available places is required.
+            </small>
+        </div>
+    </fieldset>
+
+    <fieldset ng-if="edit" class="form-group">
+        <label for="placesAv">Number of available free places in a vehicle</label>
+        <input ng-if="edit" class="form-control" min="0" max="{{offer.placesMax}}" type="Number" id="placesAv"
+               name="placesAv" ng-model="offer.placesAv" required>
+
+        <div class="error" ng-show="offer_form.placesAv.$dirty && offer_form.placesAv.$invalid">
+            <small class="error" ng-show="offer_form.placesAv.$error.required">
+                Available number of available places is required. Max is {{offer.placesMax}}
+            </small>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="desc">Place of departure</label>
+        <textarea class="form-control" type="text" id="departure" name="departure" ng-model="offer.departure"
+                  required></textarea>
+
+        <div class="error" ng-show="offer_form.departure.$dirty && offer_form.departure.$invalid">
+            <small class="error" ng-show="offer_form.departure.$error.required">
+                Departure localization is required.
+            </small>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="desc">Description</label>
+        <textarea class="form-control" type="text" id="desc" name="desc" ng-model="offer.desc" required></textarea>
+
+        <div class="error" ng-show="offer_form.desc.$dirty && offer_form.desc.$invalid">
+            <small class="error" ng-show="offer_form.desc.$error.required">
+                Description of the offer is required.
+            </small>
+        </div>
+    </fieldset>
+
+
+    <input ng-if="offer_form.$valid && edit" type="submit" value="Edit" class="btn btn-success btn-lg btn-block"
+           ng-click="editOffer()" ng-disabled="isSubmitting">
+    <input ng-if="offer_form.$valid && !edit" type="submit" value="Save" class="btn btn-success btn-lg btn-block"
+           ng-click="saveOffer()" ng-disabled="isSubmitting">
+    <input ng-if="offer_form.$invalid" type="submit" value="Write information about offer to save"
+           class="btn btn-danger btn-lg btn-block" ng-click="" ng-disabled="isSubmitting">
+</form>

@@ -1,0 +1,64 @@
+.navbar-form .form-group {
+    margin-left: 10px;
+}
+.navbar-form button {
+    margin-left: 10px;
+}
+
+.toast-top-right {
+    top: 70px;
+}
+
+.toast-success {
+    background-color: #ff9b2d;
+}
+
+.navbar {
+    font-size: 16px;
+}
+
+.navbar-brand {
+    font-size: 28px;
+}
+
+footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+footer p {
+    border-top: 1px solid #0d3349;
+}
+
+.button-events {
+    padding-top: 15px;
+}
+.button-event {
+    padding-bottom: 15px;
+}
+.freeplaces {
+    font-size: 24px;
+}
+
+.glyphicon-envelope {
+    font-size: 1.5em;
+    padding: 5px;
+}
+
+.bigletters {
+    font-size: 16px;
+}
+
+.clickableRow {
+    cursor: pointer;
+}
+
+.useredit {
+    padding-left: 10px;
+}
+
+.sortorder:after {
+    content: '\25b2';
+}
+.sortorder.reverse:after {
+    content: '\25bc';
+}

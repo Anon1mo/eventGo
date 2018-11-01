@@ -1,0 +1,65 @@
+<div class="well" style="text-align: center">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Offer put by</div>
+                <div class="panel-body">
+                    <p><a href="#/users/{{offer.user_id._id}}">{{offer.user_id.username}}</a></p>
+                </div>
+                <div class="panel-heading">Event</div>
+                <div class="panel-body">
+                    <p><a href="#/events/{{offer.event_id._id}}">{{offer.event_id.name}}</a></p>
+                </div>
+                <div class="panel-heading">Telephone</div>
+                <div class="panel-body">
+                    <p ng-if="going">{{offer.user_id.tel}}</p>
+
+                    <p ng-if="!going">Join offer to see a telephone number</p>
+                </div>
+                <div class="panel-heading">Free places</div>
+                <div class="panel-body freeplaces">
+                    <p ng-if="offer.placesAv > 0"><span class="list-group-item-success">{{offer.placesAv}}/{{offer.placesMax}}</span>
+                    </p>
+
+                    <p ng-if="offer.placesAv <= 0"><span class="list-group-item-danger">{{offer.placesAv}}/{{offer.placesMax}}</span>
+                    </p>
+                </div>
+                <div class="panel-heading">Place of departure</div>
+                <div class="panel-body">
+                    <p>{{offer.departure}}</p>
+                </div>
+                <div class="panel-heading">Price</div>
+                <div class="panel-body">
+                    <p>{{offer.price}} ZL</p>
+                </div>
+                <div class="panel-heading">Car</div>
+                <div class="panel-body">
+                    <p>{{offer.user_id.car}}</p>
+                </div>
+                <div class="panel-heading">Additional information</div>
+                <div class="panel-body">
+                    <p>{{offer.desc}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <button ng-if="!going && offer.user_id._id !== identity.currentUser._id"
+                    class="btn btn-success btn-lg btn-block" ng-click="joinOffer()"
+                    ng-disabled="offer.placesAv <= 0">Join offer
+            </button>
+            <button ng-if="going" class="btn btn-danger btn-lg btn-block" ng-click="leaveOffer()">Leave offer</button>
+            <legend class="button-events" style="text-align: center">Users</legend>
+            <div class="media col-md-3" ng-repeat="user in offer.users">
+                <gravatar email="user.email"></gravatar>
+
+                <div class="media-body" style="text-align: center">
+                    <h3 class="media-heading"><strong><a href="#/users/{{user._id}}">{{user.username}}</a></strong></h3>
+
+                    <p class="small">Age: {{user.age}}</p>
+
+                    <p class="small">City: {{user.location}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

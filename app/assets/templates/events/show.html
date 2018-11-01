@@ -1,0 +1,52 @@
+<div style="text-align: center" class="list-group">
+    <h2 class="list-group-item-heading list-group-item-info ">{{event.name}}, {{event.date | date:'dd/MM/yyyy'}},
+        {{event.location}}<span class="pull-right"><a ng-href="#/reports/{{event._id}}" class="btn btn-danger btn-sm">Report
+            event</a></span></h2>
+
+    <p class="list-group-item-info">{{event.desc}}</p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-success btn-lg btn-block" ng-href="#/events/{{event._id}}/newOffer">Add Offer</a>
+        <legend class="button-events">Offers
+            <button class="btn btn-info btn-sm pull-right" ng-click="order('price')">Order by price of offer</button>
+            <span class="sortorder" ng-show="predicate === 'date'" ng-class="{reverse:reverse}"></span></legend>
+        <div class="panel panel-info" ng-repeat="offer in event.offers | orderBy:predicate:reverse">
+
+            <div class="panel-heading">Offer <span class="pull-right">{{$index+1}}</span></div>
+
+            <div class="panel-body">
+
+                <dl class="dl-horizontal">
+                    <dt>Price:</dt>
+                    <dd>{{offer.price}}</dd>
+                    <dt>Departure from:</dt>
+                    <dd>{{offer.departure}}</dd>
+                    <dt>Free places:</dt>
+                    <dd>{{offer.placesAv}}/{{offer.placesMax}}</dd>
+                </dl>
+
+                <div class="btn-toolbar text-center">
+                    <a ng-href="#/offers/{{offer._id}}" class="btn btn-success btn-lg btn-block" role="button">Show</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <button ng-if="going" class="btn btn-danger btn-lg btn-block" ng-click="leaveEvent()">Leave Event</button>
+        <button ng-if="!going" class="btn btn-success btn-lg btn-block" ng-click="joinEvent()">Join Event</button>
+        <legend class="button-events" style="text-align: center">Users</legend>
+        <div class="media col-md-3" ng-repeat="user in event.users">
+            <gravatar email="user.email"></gravatar>
+            <div class="media-body" style="text-align: center">
+                <h3 class="media-heading"><strong><a href="#/users/{{user._id}}">{{user.username}}</a></strong></h3>
+
+                <p class="small">Age: {{user.age}}</p>
+
+                <p class="small">City: {{user.location}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

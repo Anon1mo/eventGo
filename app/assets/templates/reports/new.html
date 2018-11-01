@@ -1,0 +1,17 @@
+<h1 style="text-align: center">New report</h1>
+<form name="report_form" novalidate>
+    <fieldset class="form-group">
+        <label for="msg">Message to admin. Explain why you want to report this event</label>
+        <input class="form-control" type="text" id="msg" name="msg" ng-model="report.msg" required>
+
+        <div class="error" ng-show="report_form.msg.$dirty && report_form.msg.$invalid">
+            <small class="error" ng-show="report_form.msg.$error.required">
+                Write a reason for reporting.
+            </small>
+        </div>
+    </fieldset>
+    <input ng-if="report_form.$valid" type="submit" value="Save" class="btn btn-success btn-lg btn-block"
+           ng-click="sendReport()">
+    <input ng-if="report_form.$invalid" type="submit" value="Write a message to save"
+           class="btn btn-danger btn-lg btn-block">
+</form>

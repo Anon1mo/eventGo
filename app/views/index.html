@@ -1,0 +1,120 @@
+<html ng-app="EventGo">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EventGo</title>
+    <link rel="stylesheet" href="assets/styles/bootstrap.css" />
+    <link rel="stylesheet" href="assets/styles/toastr.css" />
+    <link rel="stylesheet" href="assets/styles/style.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a href="/#/">EventGo</a>
+                </div>
+            </div>
+            <nw-page-nav></nw-page-nav>
+            <div class="navbar-right" ng-controller="LoginController">
+                <form class="navbar-form" ng-hide="identity.isAuthenticated()">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#/signup">Sign Up</a></li>
+                    </ul>
+                    <fieldset class="form-group">
+                        <input class="form-control" placeholder="Username" ng-model="username">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control" type="password" placeholder="Password" ng-model="password">
+                    </fieldset>
+                    <button class="btn btn-primary" ng-disabled="!username || !password " ng-click="signin(username, password)">Sign
+                        In
+                    </button>
+                </form>
+                <ul class="nav navbar-nav navbar-right" ng-show="identity.isAuthenticated()">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="" data-toggle="dropdown">
+                            {{identity.currentUser.name}}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-show="identity.currentUser.isAdmin()">
+                                <a ng-href="#/admin/">Admin Panel</a>
+                            </li>
+                            <li>
+                                <a ng-href="#/users/{{identity.currentUser._id}}">Profile</a>
+                            </li>
+                            <li>
+                                <a ng-href="#/profile">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a ng-href="#/my">My Events and Offers</a>
+                            </li>
+                            <li>
+                                <a ng-href="#/messages/{{identity.currentUser._id}}">Messages</a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="signout()">Sign Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div ng-view class="container"></div>
+    <footer class="container static" style="text-align: center">
+        <p class="text-muted">&copy; 2016 Piotr Jakubowski, Politechnika Poznanska</p>
+    </footer>
+
+
+</body>
+
+<!-- vendor -->
+<script src="assets/javascript/vendor/jquery-2.1.3.min.js"></script>
+<script src="assets/javascript/vendor/angular.js"></script>
+<script src="assets/javascript/vendor/angular-route.js"></script>
+<script src="assets/javascript/vendor/angular-resource.js"></script>
+<script src="assets/javascript/vendor/angular-cookies.js"></script>
+<script src="assets/javascript/vendor/bootstrap.js"></script>
+<script src="assets/javascript/vendor/ngGravatar.js"></script>
+<script src="assets/javascript/vendor/md5.js"></script>
+<script src="assets/javascript/vendor/toastr.js"></script>
+
+<!-- App -->
+<script src="assets/javascript/app.js"></script>
+<script src="assets/javascript/routes.js"></script>
+
+<!-- Directives -->
+<script src="assets/javascript/directives/nwPageNav.js"></script>
+<script src="assets/javascript/directives/title.js"></script>
+<script src="assets/javascript/directives/nwNotifier.js"></script>
+
+
+<!-- Controllers -->
+<script src="assets/javascript/controllers/loginController.js"></script>
+<script src="assets/javascript/controllers/usersSignupController.js"></script>
+<script src="assets/javascript/controllers/usersProfileController.js"></script>
+<script src="assets/javascript/controllers/eventIndexController.js"></script>
+<script src="assets/javascript/controllers/eventShowController.js"></script>
+<script src="assets/javascript/controllers/eventCreateController.js"></script>
+<script src="assets/javascript/controllers/usersShowController.js"></script>
+<script src="assets/javascript/controllers/usersIndexController.js"></script>
+<script src="assets/javascript/controllers/offerCreateController.js"></script>
+<script src="assets/javascript/controllers/offerShowController.js"></script>
+<script src="assets/javascript/controllers/messageIndexController.js"></script>
+<script src="assets/javascript/controllers/reportCreateController.js"></script>
+<script src="assets/javascript/controllers/adminShowController.js"></script>
+<script src="assets/javascript/controllers/usersMyController.js"></script>
+
+<!-- Services -->
+<script src="assets/javascript/services/identity.js"></script>
+<script src="assets/javascript/services/auth.js"></script>
+<script src="assets/javascript/services/event.js"></script>
+<script src="assets/javascript/services/user.js"></script>
+<script src="assets/javascript/services/offer.js"></script>
+<script src="assets/javascript/services/message.js"></script>
+<script src="assets/javascript/services/report.js"></script>
+
+</html>

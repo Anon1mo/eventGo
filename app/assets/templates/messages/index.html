@@ -1,0 +1,43 @@
+<h1 style="text-align: center">Messages</h1>
+<div class="row">
+    <div ng-repeat="msg in msgs" class="col-sm-6">
+        <h2>{{msg.user1}}</h2>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="text-align: center">{{identity.currentUser.username}}'s Inbox</div>
+    <table class="table table-hover bigletters">
+        <thead>
+        <tr>
+            <th class="col-md-2">Sender</th>
+            <th class="col-md-8">Last message</th>
+            <th class="col-md-2">Date of last message</th>
+        </tr>
+        </thead>
+        <tbody class="clickableRow" title="Click to see all the messages from this user" ng-repeat="message in messages"
+               ng-click="seeMessage($index)">
+        <tr ng-if="receiver === undefined || receiver.user2.username === message.user2.username ">
+            <td class="col-md-2"><a ng-href="#/users/{{message.user2._id}}">{{message.user2.username}}</a></td>
+            <td class="col-md-8"><span
+                    ng-if="!message.see">{{message.msgs[message.msgs.length-1].msg | limitTo:80}}</span></td>
+            <td class="col-md-2">{{message.updated_at | date: 'MM/dd/yyyy @ h:mm'}}</td>
+        </tr>
+        <tr ng-repeat="sender in message.msgs" ng-if="message.see">
+            <td ng-if="sender.sender === message.user2.username" class="success" class="col-md-2">{{sender.sender}}</td>
+            <td ng-if="sender.sender !== message.user2.username" class="info" class="col-md-2">{{sender.sender}}</td>
+            <td class="col-md-8">{{sender.msg}}</td>
+            <td class="col-md-2">{{sender.date | date: 'MM/dd/yyyy @ h:mm'}}</td>
+        </tr>
+        </tbody>
+        <tr ng-if="writing" class="form-horizontal">
+            <td class="col-md-2">Write to: {{receiver.user2.username}}</td>
+            <td class="col-md-8">
+                <textarea ng-model="newMessage.msg" class="form-control" id="msg" rows="2"></textarea>
+            </td>
+            <td class="col-md-2">
+                <button class="btn btn-success btn-lg btn-block" type="submit" ng-click="send()">Send!</button>
+            </td>
+        </tr>
+    </table>
+</div>

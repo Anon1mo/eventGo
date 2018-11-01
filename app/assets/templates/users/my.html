@@ -1,0 +1,34 @@
+<h1 style="text-align: center">My events and offers</h1>
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-success" style="text-align: center">My Events</li>
+            <li class="list-group-item" ng-repeat="event in user.events"><a ng-href="#/events/{{event._id}}">{{event.name}}</a>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-success" style="text-align: center">My joined offers</li>
+            <li class="list-group-item" ng-repeat="offer in user.offers"><a ng-href="#/offers/{{offer._id}}">{{offer.event_id.name}}</a><span>&nbsp; {{offer.price}} ZL | {{offer.event_id.date | date:'dd-MM-yyyy'}}</span>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-success" style="text-align: center">Offers</li>
+        </ul>
+        <ul class="list-group" ng-repeat="myOffer in offers">
+            <li class="list-group-item"><a ng-href="#/offers/{{myOffer._id}}">{{myOffer.event_id.name}}</a><span> {{myOffer.placesAv}}/{{myOffer.placesMax}} places left</span>
+                <span class="pull-right useredit"><a
+                        ng-href="#/events/{{myOffer.event_id._id}}/newOffer/{{myOffer._id}}/"
+                        class="btn btn-warning btn-sm ">Edit offer</a></span>
+                <span class="pull-right"><button class="btn btn-danger btn-sm" ng-click="deleteOffer(myOffer)">Delete
+                </button></span></li>
+            <li class="list-group-item list-group-item-info" ng-repeat="user in myOffer.users">
+                {{user.username}} <span class="pull-right"><button class="btn btn-danger btn-sm"
+                                                                   ng-click="deleteUserFromOffer(myOffer, user)">Delete
+                from offer
+            </button></span>
+            </li>
+        </ul>
+    </div>
+</div>

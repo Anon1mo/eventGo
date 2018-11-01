@@ -1,0 +1,56 @@
+<h1 ng-if="!edit">New Event</h1>
+<h1 ng-if="edit">Edit Event</h1>
+<form name="event_form" novalidate>
+    <fieldset class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" id="name" name="name" ng-model="event.name" required>
+
+        <div class="error" ng-show="event_form.name.$dirty && event_form.name.$invalid">
+            <small class="error" ng-show="event_form.name.$error.required">
+                Name of the event is required.
+            </small>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="location">Location</label>
+        <input class="form-control" type="text" id="location" name="location" ng-model="event.location" required>
+
+        <div class="error" ng-show="event_form.location.$dirty && event_form.location.$invalid">
+            <small class="error" ng-show="event_form.location.$error.required">
+                Location of the event is required.
+            </small>
+        </div>
+    </fieldset>
+
+    <fieldset ng-if="!edit" class="form-group">
+        <label for="date">Date</label>
+        <input class="form-control" type="date" id="date" name="date" placeholder="yyyy-MM-dd" ng-model="event.date"
+               required>
+
+        <div class="error" ng-show="event_form.date.$dirty && event_form.date.$invalid">
+            <small class="error" ng-show="event_form.date.$error.required">
+                Date of the event is required.
+            </small>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="desc">Description</label>
+        <textarea class="form-control" type="text" id="desc" name="desc" ng-model="event.desc" required></textarea>
+
+        <div class="error" ng-show="event_form.desc.$dirty && event_form.desc.$invalid">
+            <small class="error" ng-show="event_form.desc.$error.required">
+                Description of the event is required.
+            </small>
+        </div>
+    </fieldset>
+
+
+    <input ng-if="event_form.$valid && edit" type="submit" value="{{isSubmitting ? 'saving...' : 'Edit'}}"
+           class="btn btn-success btn-lg btn-block" ng-click="editEvent()" ng-disabled="isSubmitting">
+    <input ng-if="event_form.$valid && !edit" type="submit" value="{{isSubmitting ? 'saving...' : 'Save'}}"
+           class="btn btn-success btn-lg btn-block" ng-click="saveEvent()" ng-disabled="isSubmitting">
+    <input ng-if="event_form.$invalid" type="submit" value="{{isSubmitting ? 'saving...' : 'Save'}}"
+           class="btn btn-danger btn-lg btn-block" ng-click="" ng-disabled="isSubmitting">
+</form>
