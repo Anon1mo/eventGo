@@ -14,7 +14,7 @@ Used technologies:
 
 In the terminal:
 
-2. Run `npm install` in the main directory
-3. Run `npm start`
+3. Run `npm install` in the main directory
+4. Run `npm start`
 
 Go to [http://localhost:5000](http://localhost:5000) in your favourite browser to use the app.
